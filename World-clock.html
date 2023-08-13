@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Clock</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            background-image: url('background.png'); /* Replace with your image URL */
+            background-position: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white; /* Set text color to white for better visibility */
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .jumbotron {
+    background-color: rgba(104, 67, 165, 1);
+    border-radius: 20px;
+    padding: 20px;
+    width: 80%; /* Adjust the width as needed */
+    height: 80vh; /* Adjust the height as needed */
+    background-position: center;
+    background-size: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10% auto; /* Center vertically */
+}
+
+        #countryDropdown {
+            margin-top: 10px;
+        }
+
+        #selectedTime {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4" id="selectedTime">Current Time:</h1>
+            <p class="lead">Select a country:</p>
+            <select id="countryDropdown" class="form-control">
+                <option value="">Select a country</option>
+                <!-- Add more country options here -->
+                <option value="America/New_York">USA</option>
+                <option value="Europe/London">UK</option>
+                <option value="Asia/Kolkata">India</option>
+                <!-- Add more countries as needed -->
+            </select>
+            <div style="margin-top: 25px;">
+            <img src="good-time.jpg" alt="Image Description" style="max-width: 70%; height: auto; ">
+          </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data-10-year-range.min.js"></script>
+    <script>
+        const countryDropdown = document.getElementById("countryDropdown");
+        const selectedTime = document.getElementById("selectedTime");
+
+        countryDropdown.addEventListener("change", function() {
+            const selectedCountry = countryDropdown.value;
+            if (selectedCountry) {
+                const timeInSelectedCountry = moment().tz(selectedCountry).format("MMMM D, YYYY - h:mm:ss A");
+                selectedTime.textContent = `Current Time in ${countryDropdown.options[countryDropdown.selectedIndex].text}: ${timeInSelectedCountry}`;
+            } else {
+                selectedTime.textContent = "Current Time:";
+            }
+        });
+    </script>
+</body>
+</html>
